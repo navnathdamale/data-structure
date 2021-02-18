@@ -18,10 +18,10 @@ package com.java.practice.array;
  */
 public class Binomial1 {
     public static void main(String[] args) {
-            long n = 9999999;
-        long r = 33;
+        long n = 8;
+        long r = 3;
         long start = System.currentTimeMillis();
-       // System.out.println(nCr(n, r));
+        // System.out.println(nCr(n, r));
         System.out.println("time using recursion :" + (System.currentTimeMillis() - start));
 
         start = System.currentTimeMillis();
