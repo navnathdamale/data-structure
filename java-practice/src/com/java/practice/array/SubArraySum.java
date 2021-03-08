@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class SubArraySum {
     public static void main(String[] args) {
-        int[] nums = {1, 2, 2, 2, 4, 4, 1, 1, 2, 6};
+        int[] nums = {1, 2, 2, 2, 4, 4, 1, 1, 4, 6};
         int givenSum = 5;
         printSumSubArray(nums, givenSum);
     }
@@ -32,6 +32,7 @@ public class SubArraySum {
         int sum = 0;
         Map<Integer, Integer> countMap = new HashMap<>();
         boolean isFound = false;
+        countMap.put(0, 0);
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
             if (countMap.containsKey(sum - k)) {

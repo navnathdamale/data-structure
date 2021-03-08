@@ -1,9 +1,7 @@
 package com.java.practice.array;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Given an array of bird sightings where every element represents a bird type id,
@@ -28,7 +26,12 @@ public class LowerFrequentNumber {
     public static void main(String[] args) {
         //List<Integer> arr = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 3, 4);
         List<Integer> arr = Arrays.asList(1, 3, 2, 5, 6);
-        System.out.println(migratoryBirds(arr));
+        //System.out.println(migratoryBirds(arr));
+
+        int[] tt = {3, 0, 1, 0};
+        // System.out.println(Arrays.toString(topKFrequent(tt, 1)));
+
+        System.out.println(lessFrequent("AaCACacacc"));
     }
 
     public static int migratoryBirds(List<Integer> arr) {
@@ -54,5 +57,31 @@ public class LowerFrequentNumber {
 
 
         return lowerFrequency;
+    }
+
+    public static Character lessFrequent(String target) {
+        if (target == null || target == "") {
+            return null;
+        }
+
+        Map<Character, Integer> countMap = new LinkedHashMap<>();
+        for (Character ch : target.toCharArray()) {
+            countMap.put(ch, countMap.getOrDefault(ch, 0) + 1);
+        }
+
+        return countMap.entrySet().stream().filter(e -> e.getValue() == 1).map(k -> k.getKey()).limit(1).collect(Collectors.toList()).get(0);
+    }
+
+    public static int[] topKFrequent(int[] nums, int k) {
+
+        Map<Integer, Integer> countMap = new TreeMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            countMap.put(nums[i], countMap.getOrDefault(nums[i], 0) + 1);
+        }
+
+        List<Integer> keys = countMap.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed()).map(x -> x.getKey()).limit(k).collect(Collectors.toList());
+
+        return keys.stream().mapToInt(Integer::intValue).toArray();
+
     }
 }

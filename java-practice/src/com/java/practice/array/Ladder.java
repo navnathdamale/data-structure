@@ -20,9 +20,9 @@ package com.java.practice.array;
 public class Ladder {
 
     public static void main(String[] args) {
-        // int[] A = { 2, 3, 1, 1, 4 };
-        int[] A = {2, 0, 0, 1, 4};
-        //int[] A = { 1, 4, 3, 7, 1, 2, 6, 7, 6, 10 };
+        //int[] A = {2, 3, 1, 1, 4};
+        //int[] A = {2, 0, 0, 1, 4};
+        int[] A = {1, 4, 3, 7, 1, 2, 6, 7, 6, 10};
         int noOfJump = jump(A);
         System.out.println((noOfJump > 0 ? noOfJump : "Not Possible"));
     }
@@ -61,6 +61,27 @@ public class Ladder {
                 }
             }
         }
+        return jump;
+    }
+
+    public static int jump1(int[] A) {
+        if (A.length <= 1) {
+            return 0;
+        }
+
+        int ladder = A[0];
+        int jump = 0;
+
+        for (int i = 1; i < A.length; i++) {
+            if (i == A.length - 1) {
+                return jump;
+            }
+
+            if (ladder < i + A[i]) {
+                ladder = i + A[i];
+            }
+        }
+
         return jump;
     }
 }

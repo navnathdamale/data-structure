@@ -3,36 +3,50 @@ package com.ds.intro.heap;
 import java.util.Arrays;
 
 public class Main {
-	public static void main(String[] args) {
-		Heap heap = new Heap();
-		heap.insert(10);
-		heap.insert(20);
-		heap.insert(30);
-		heap.insert(40);
-		heap.insert(50);
-		heap.remove();
+    public static void main(String[] args) {
+        MaxHeap maxHeap = new MaxHeap();
+        maxHeap.insert(10);
+        maxHeap.insert(20);
+        maxHeap.insert(30);
+        maxHeap.insert(40);
+        maxHeap.insert(50);
+        maxHeap.remove();
 
-		heap.print();
+        maxHeap.print();
 
-		int[] numbers = { 5, 3, 10, 1, 4, 2 };
+        int[] numbers = {1, 2, 3, 4, 5, 6};
 
-		Heap maxHeap = new Heap();
-		for (int i : numbers) {
-			maxHeap.insert(i);
-		}
+        MaxHeap maxHeap1 = new MaxHeap();
+        for (int i : numbers) {
+            maxHeap1.insert(i);
+        }
+        maxHeap1.print();
 
-		while (!maxHeap.isEmpty()) {
-			System.out.println(" " + maxHeap.remove());
-		}
 
-		int[] numbers1 = { 5, 3, 10, 1, 4, 2 };
-		System.out.println(Arrays.toString(numbers1));
+        while (!maxHeap1.isEmpty()) {
+            System.out.println(" " + maxHeap1.remove());
+        }
 
-		Heapify.heapify(numbers1);
+        System.out.println(Arrays.toString(numbers));
 
-		System.out.println(Arrays.toString(numbers1));
+        Heapify.heapify(numbers);
 
-		System.out.println(Heapify.getKthLargest(numbers1, 6));
+        System.out.println(Arrays.toString(numbers));
 
-	}
+        System.out.println(Heapify.getKthLargest(numbers, 6));
+
+        int[] numbers1 = {1, 2, 3, 4, 5, 6};
+
+        MinHeap minHeap = new MinHeap(10);
+        for (int i : numbers1) {
+            minHeap.insert(i);
+        }
+
+        minHeap.print();
+
+        while (!minHeap.isEmpty()) {
+            System.out.println("\n " + minHeap.remove());
+        }
+
+    }
 }

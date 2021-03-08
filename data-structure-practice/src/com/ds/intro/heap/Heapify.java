@@ -2,50 +2,52 @@ package com.ds.intro.heap;
 
 public class Heapify {
 
-	public static int getKthLargest(int[] array, int k) {
-		Heap heap = new Heap();
-		for (int i : array) {
-			heap.insert(i);
-		}
+    public static int getKthLargest(int[] array, int k) {
+        if (k < 1 || array.length < k) throw new IllegalArgumentException();
 
-		for (int j = 0; j < k - 1; j++) {
-			heap.remove();
-		}
+        MaxHeap maxHeap = new MaxHeap();
+        for (int i : array) {
+            maxHeap.insert(i);
+        }
 
-		return heap.max();
-	}
+        for (int j = 0; j < k - 1; j++) {
+            maxHeap.remove();
+        }
 
-	public static void heapify(int[] array) {
-		int lastParentIndex = (array.length / 2) - 1;
-		for (int i = lastParentIndex; i >= 0; i--) {
-			heapify(array, i);
-		}
-	}
+        return maxHeap.max();
+    }
 
-	private static void heapify(int[] array, int index) {
-		int largeIndex = index;
-		int leftIndex = (index * 2) + 1;
-		int rightIndex = (index * 2) + 2;
+    public static void heapify(int[] array) {
+        int lastParentIndex = (array.length / 2) - 1;
+        for (int i = lastParentIndex; i >= 0; i--) {
+            heapify(array, i);
+        }
+    }
 
-		if (leftIndex < array.length && array[leftIndex] > array[largeIndex]) {
-			largeIndex = leftIndex;
-		}
+    private static void heapify(int[] array, int index) {
+        int largeIndex = index;
+        int leftIndex = (index * 2) + 1;
+        int rightIndex = (index * 2) + 2;
 
-		if (rightIndex < array.length && array[rightIndex] > array[largeIndex]) {
-			largeIndex = rightIndex;
-		}
+        if (leftIndex < array.length && array[leftIndex] > array[largeIndex]) {
+            largeIndex = leftIndex;
+        }
 
-		if (index == largeIndex) {
-			return;
-		}
+        if (rightIndex < array.length && array[rightIndex] > array[largeIndex]) {
+            largeIndex = rightIndex;
+        }
 
-		swap(array, index, largeIndex);
-		heapify(array, largeIndex);
-	}
+        if (index == largeIndex) {
+            return;
+        }
 
-	private static void swap(int[] array, int first, int second) {
-		int temp = array[first];
-		array[first] = array[second];
-		array[second] = temp;
-	}
+        swap(array, index, largeIndex);
+        heapify(array, largeIndex);
+    }
+
+    private static void swap(int[] array, int first, int second) {
+        int temp = array[first];
+        array[first] = array[second];
+        array[second] = temp;
+    }
 }

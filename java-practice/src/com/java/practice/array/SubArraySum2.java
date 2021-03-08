@@ -6,7 +6,7 @@ import java.util.Map;
 public class SubArraySum2 {
     public static void main(String[] args) {
 
-        int[] nums = {1, 2, 2, 2, 4, 4, 1, 1, 2, 6};
+        int[] nums = {1, 2, 2, 2, 4, 4, 1, 1, 4, 6};
         int k = 5;
         System.out.println(subarraySum(nums, k));
     }
