@@ -29,8 +29,8 @@ public class MinimumSumPath {
         list.get(2).add(6);
 
 
-        //System.out.println(minPathSum(grid));
-        System.out.println(minPathSum(list));
+        System.out.println(minPathSum(grid));
+        //System.out.println(minPathSum(list));
     }
 
     public static int minPathSum(int[][] grid) {
