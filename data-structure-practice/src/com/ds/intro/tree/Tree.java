@@ -186,6 +186,7 @@ public class Tree {
 
         return isBinarySearchTree(node.left, min, node.value - 1)
                 && isBinarySearchTree(node.right, node.value + 1, max);
+
     }
 
     private boolean equals(Node first, Node second) {

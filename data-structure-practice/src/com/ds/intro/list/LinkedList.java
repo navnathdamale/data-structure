@@ -4,196 +4,241 @@ import java.util.NoSuchElementException;
 
 public class LinkedList {
 
-	private Node first;
-	private Node last;
-	private int size;
+    private Node first;
+    private Node last;
+    private int size;
 
-	public void addFirst(int item) {
-		Node node = new Node(item);
-		if (isEmpty()) {
-			first = last = node;
-		} else {
-			node.next = first;
-			first = node;
-		}
-		size++;
-	}
+    public void addFirst(int item) {
+        Node node = new Node(item);
+        if (isEmpty()) {
+            first = last = node;
+        } else {
+            node.next = first;
+            first = node;
+        }
+        size++;
+    }
 
-	public void addLast(int item) {
-		Node node = new Node(item);
-		if (isEmpty()) {
-			first = last = node;
-		} else {
-			last.next = node;
-			last = node;
-		}
-		size++;
-	}
+    public void addLast(int item) {
+        Node node = new Node(item);
+        if (isEmpty()) {
+            first = last = node;
+        } else {
+            last.next = node;
+            last = node;
+        }
+        size++;
+    }
 
-	public int indexOf(int item) {
-		int index = 0;
-		Node current = first;
-		while (current != null) {
-			if (current.value == item) {
-				return index;
-			}
-			current = current.next;
-			index++;
-		}
-		return -1;
-	}
+    public int indexOf(int item) {
+        int index = 0;
+        Node current = first;
+        while (current != null) {
+            if (current.value == item) {
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
+        return -1;
+    }
 
-	public boolean contains(int item) {
-		return indexOf(item) != -1;
-	}
+    public boolean contains(int item) {
+        return indexOf(item) != -1;
+    }
 
-	public void removeFirst() {
-		if (isEmpty()) {
-			throw new NoSuchElementException();
-		}
+    public void removeFirst() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
 
-		if (first == last) {
-			first = last = null;
-		} else {
-			Node second = first.next;
-			first.next = null;
-			first = second;
-		}
-		size--;
-	}
+        if (first == last) {
+            first = last = null;
+        } else {
+            Node second = first.next;
+            first.next = null;
+            first = second;
+        }
+        size--;
+    }
 
-	public void removeLast() {
-		if (isEmpty()) {
-			throw new NoSuchElementException();
-		}
+    public void removeLast() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
 
-		if (first == last) {
-			first = last = null;
-		} else {
-			Node previousNode = getPreviousNode(last);
-			last = previousNode;
-			last.next = null;
-		}
+        if (first == last) {
+            first = last = null;
+        } else {
+            Node previousNode = getPreviousNode(last);
+            last = previousNode;
+            last.next = null;
+        }
 
-		size--;
-	}
+        size--;
+    }
 
-	public int size() {
-		return size;
-	}
+    public int size() {
+        return size;
+    }
 
-	public int[] toArray() {
-		int[] array = new int[size];
-		int index = 0;
-		Node current = first;
-		while (current != null) {
-			array[index++] = current.value;
-			current = current.next;
-		}
-		return array;
-	}
+    public int[] toArray() {
+        int[] array = new int[size];
+        int index = 0;
+        Node current = first;
+        while (current != null) {
+            array[index++] = current.value;
+            current = current.next;
+        }
+        return array;
+    }
 
-	public void reverse() {
-		if (isEmpty()) {
-			return;
-		}
+    public void reverse() {
+        if (isEmpty()) {
+            return;
+        }
 
-		Node prev = first;
-		Node current = first.next;
-		while (current != null) {
-			Node next = current.next;
-			current.next = prev;
-			prev = current;
-			current = next;
-		}
+        Node prev = first;
+        Node current = first.next;
+        while (current != null) {
+            Node next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
 
-		last = first;
-		last.next = null;
-		first = prev;
-	}
+        last = first;
+        last.next = null;
+        first = prev;
+    }
 
-	public Node getKthFromEnd(int k) {
+    public Node getKthFromEnd(int k) {
 
-		if (k > size) {
-			throw new IllegalArgumentException();
-		}
-		Node f = first;
-		Node s = first;
+        if (k > size) {
+            throw new IllegalArgumentException();
+        }
+        Node f = first;
+        Node s = first;
 
-		for (int i = 0; i < k; i++) {
-			f = f.next;
-		}
+        for (int i = 0; i < k; i++) {
+            f = f.next;
+        }
 
-		while (f != null) {
-			f = f.next;
-			s = s.next;
-		}
+        while (f != null) {
+            f = f.next;
+            s = s.next;
+        }
 
-		return s;
-	}
+        return s;
+    }
 
-	public Node printMiddle(Node head) {
-		Node slowPointer, fastPointer;
-		slowPointer = fastPointer = first;
+    public Node printMiddle(Node head) {
+        Node slowPointer, fastPointer;
+        slowPointer = fastPointer = first;
 
-		while (fastPointer != null) {
-			fastPointer = fastPointer.next;
-			if (fastPointer != null && fastPointer.next != null) {
-				slowPointer = slowPointer.next;
-				fastPointer = fastPointer.next;
-			}
-		}
-		return slowPointer;
-	}
+        while (fastPointer != null) {
+            fastPointer = fastPointer.next;
+            if (fastPointer != null && fastPointer.next != null) {
+                slowPointer = slowPointer.next;
+                fastPointer = fastPointer.next;
+            }
+        }
+        return slowPointer;
+    }
 
-	public boolean hasLoop() {
-		Node fast, slow;
-		fast = slow = first;
+    public boolean hasLoop() {
+        Node fast, slow;
+        fast = slow = first;
 
-		while (fast != null && fast.next != null) {
-			fast = fast.next.next;
-			slow = slow.next;
-			if (fast == slow) {
-				return true;
-			}
-		}
-		return false;
-	}
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	private Node getPreviousNode(Node node) {
-		Node current = first;
-		while (current != null) {
-			if (current.next == node) {
-				return current;
-			}
-			current = current.next;
-		}
-		return null;
-	}
+    private Node getPreviousNode(Node node) {
+        Node current = first;
+        while (current != null) {
+            if (current.next == node) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
+    }
 
-	private boolean isEmpty() {
-		return first == null;
-	}
+    private boolean isEmpty() {
+        return first == null;
+    }
 
-	public void print() {
-		Node current = first;
-		while (current != null) {
-			System.out.print(current.value + " -> ");
-			current = current.next;
-		}
-	}
+    public void print() {
+        Node current = first;
+        while (current != null) {
+            System.out.print(current.value + " -> ");
+            current = current.next;
+        }
+    }
 
-	private class Node {
-		private int value;
-		private Node next;
+    private class Node {
+        private int value;
+        private Node next;
 
-		public Node(int value) {
-			this.value = value;
-		}
+        public Node(int value) {
+            this.value = value;
+        }
 
-		@Override
-		public String toString() {
-			return "Node [value=" + value + ", next=" + next + "]";
-		}
-	}
+        @Override
+        public String toString() {
+            return "Node [value=" + value + ", next=" + next + "]";
+        }
+    }
+
+    public void printFromEnd(Node first) {
+        if (first == null) {
+            return;
+        }
+        printFromEnd(first.next);
+        System.out.print(" " + first.value);
+    }
+
+    public Node getFirst() {
+        return first;
+    }
+
+    public Node getStartOfLoop(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node slow, fast;
+        slow = head;
+        fast = head;
+        boolean isLoop = false;
+        while (slow != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                isLoop = true;
+                break;
+            }
+        }
+
+        if (isLoop) {
+            slow = head;
+            while (slow != null) {
+                slow = slow.next;
+                fast = fast.next;
+                if (slow == fast) {
+                    return fast;
+                }
+            }
+        }
+
+        return null;
+
+    }
 }
