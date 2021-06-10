@@ -35,7 +35,7 @@ public class Main {
 
         System.out.println(Heapify.getKthLargest(numbers, 6));
 
-        int[] numbers1 = {1, 2, 3, 4, 5, 6};
+        int[] numbers1 = {6, 5, 4, 3, 2, 1};
 
         MinHeap minHeap = new MinHeap(10);
         for (int i : numbers1) {
